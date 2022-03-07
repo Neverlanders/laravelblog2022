@@ -54,14 +54,24 @@ class AdminUsersController extends Controller
      */
     public function store(UsersRequest $request)
     {
+
         //
-        User::create([
+   /*     User::create([
            'name'=>$request['name'],
            'email'=> $request['email'],
            'password'=>Hash::make($request['password']),
             'role_id'=>$request['role_id'],
             'is_active'=>$request['is_active']
-        ]);
+        ]);*/
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request['password']);
+        $user->is_active = $request->is_active;
+        $user->save();
+
+        $user->roles()->sync($request->roles,false);
+
         return redirect('admin/users');
     }
 
