@@ -19,8 +19,7 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         //
-
-    DB::table('users')->insert([
+   DB::table('users')->insert([
             'is_active'=>1,
             //'role_id'=>1,
             'name'=> 'Tom',
@@ -31,7 +30,6 @@ class UsersTableSeeder extends Seeder
             'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at'=> Carbon::now()->format('Y-m-d H:i:s'),
         ]);
-
 
         DB::table('users')->insert([
             'is_active'=>1,
