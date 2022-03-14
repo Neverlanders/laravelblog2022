@@ -18,10 +18,10 @@ class Admin
     public function handle(Request $request, Closure $next)
     {
         if(Auth::check()){//controle bestaande user
-            if(Auth::user()->isAdmin()){ //controle zijn of user admin is
+            if(Auth::user()->isAdmin()){ //controle  of user admin is
                 return $next($request);
             }
-            return redirect('admin/users');
+           // return redirect('admin/users');
         }
         return redirect('/');
 
