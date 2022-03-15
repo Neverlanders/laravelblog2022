@@ -28,7 +28,6 @@ class UsersRolesTableSeeder extends Seeder
                     $roles->random(rand(1,3))->pluck('id')->toArray()
                 );
             }
-
         });
     }
 }
