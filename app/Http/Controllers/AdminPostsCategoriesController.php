@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class AdminPostsCategoriesController extends Controller
 {
@@ -14,6 +16,9 @@ class AdminPostsCategoriesController extends Controller
     public function index()
     {
         //
+        $categories= Category::paginate(10);
+        Session::flash('user_message','category not found');
+        return view('admin.categories.index', compact('categories'));
     }
 
     /**
@@ -24,6 +29,7 @@ class AdminPostsCategoriesController extends Controller
     public function create()
     {
         //
+        return view('admin.categories.create');
     }
 
     /**
@@ -35,6 +41,9 @@ class AdminPostsCategoriesController extends Controller
     public function store(Request $request)
     {
         //
+        Category::create($request->all());
+        Session::flash('category_message','Category ' . $request->name . ' was created!');
+        return redirect()->route('postcategories.index');
     }
 
     /**
@@ -57,6 +66,8 @@ class AdminPostsCategoriesController extends Controller
     public function edit($id)
     {
         //
+        $category = Category::findOrFail($id);
+        return view('admin.categories.edit', compact('category'));
     }
 
     /**
@@ -69,6 +80,10 @@ class AdminPostsCategoriesController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $category = Category::findOrFail($id);
+        Session::flash('category_message', 'Category ' . $category->name . ' was updated');
+        $category->update($request->all());
+        return redirect()->route('postcategories.index');
     }
 
     /**
@@ -80,5 +95,9 @@ class AdminPostsCategoriesController extends Controller
     public function destroy($id)
     {
         //
+        $category = Category::findOrFail($id);
+        Session::flash('category_message', $category->name . ' was deleted!');
+        $category->delete();
+        return redirect()->route('postcategories.index');
     }
 }

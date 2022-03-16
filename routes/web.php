@@ -48,5 +48,6 @@ Route::group(['prefix' => 'admin', 'middleware'=> ['auth','verified']], function
     Route::resource('photos',App\Http\Controllers\AdminPhotosController::class);
     Route::resource('media',App\Http\Controllers\AdminMediasController::class);
     Route::resource('posts', App\Http\Controllers\AdminPostsController::class);
+    Route::resource('postcategories', App\Http\Controllers\AdminPostsCategoriesController::class);
 });
 

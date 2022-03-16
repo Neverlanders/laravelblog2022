@@ -101,6 +101,21 @@
                 </div>
             </div>
         </li>
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePostCategories"
+               aria-expanded="true" aria-controls="collapsePostCategories">
+                <i class="fas fa-list"></i>
+                <span>Post Categories</span>
+            </a>
+            <div id="collapsePostCategories" class="collapse" aria-labelledby="collapsePostCategories" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Posts Pages:</h6>
+                    <a class="collapse-item" href="{{route('postcategories.index')}}">All Posts</a>
+                    <a class="collapse-item" href="{{route('postcategories.create')}}">Create PostCategory</a>
+                </div>
+            </div>
+        </li>
 
         <!-- Nav Item - Utilities Collapse Menu -->
         <li class="nav-item">
