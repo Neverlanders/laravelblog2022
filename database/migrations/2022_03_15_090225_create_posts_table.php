@@ -19,7 +19,7 @@ return new class extends Migration
             //$table->foreign('photo_id')->unsigned()->index();
             $table->integer('photo_id')->unsigned()->index();
             $table->integer('user_id')->unsigned()->index();
-            $table->integer('category_id')->unsigned()->index();
+           // $table->integer('category_id')->unsigned()->index();
             $table->string('title');
             $table->string('body');
             $table->timestamps();
