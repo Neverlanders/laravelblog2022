@@ -17,4 +17,7 @@ class Post extends Model
     public function categories(){
         return $this->belongsToMany(Category::class, 'category_post');
     }
+    public function photo(){
+        return $this->belongsTo(Photo::class);
+    }
 }

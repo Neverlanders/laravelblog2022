@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Photo;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class AdminPostsController extends Controller
@@ -29,7 +32,8 @@ class AdminPostsController extends Controller
     public function create()
     {
         //
-        return view('admin.posts.create');
+        $categories = Category::all();
+        return view('admin.posts.create', compact('categories'));
     }
 
     /**
@@ -41,6 +45,26 @@ class AdminPostsController extends Controller
     public function store(Request $request)
     {
         //
+        //dd($request);
+        $post = new Post();
+        $post->title = $request->title;
+        $post->body = $request->body;
+        $post->user_id = Auth::user()->id;
+        /**photo opslaan**/
+        if($file = $request->file('photo_id')){
+            /**wegschrijven naar de img folder**/
+            $name = time(). $file->getClientOriginalName();
+            $file->move('img', $name);
+            /**wegschrijven naar de photo table**/
+            $photo = Photo::create(['file'=>$name]);
+            $post['photo_id'] = $photo->id;
+        }
+        /** wegschrijven naar de post table **/
+        $post->save();
+
+        /** de gekozen categoriëen wegschrijven naar de tussentabel category_post**/
+        $post->categories()->sync($request->categories, false);
+        return redirect()->route('posts.index');
     }
 
     /**

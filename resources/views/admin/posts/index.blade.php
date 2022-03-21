@@ -19,9 +19,17 @@
             @foreach($posts as $post)
             <tr>
                 <td>{{$post->id}}</td>
-                <td>{{$post->photo_id}}</td>
+                <td>
+                    <img width="auto" height="62" src="{{$post->photo ? asset($post->photo->file) : 'http://via.placeholder.com/62'}}" alt="{{$post->title}}">
+                </td>
                 <td>{{$post->user ? $post->user->name : 'Username not known'}}</td>
-                <td>{{$post->category ? $post->category->name : 'Category not known'}}</td>
+                <td>
+                    @if($post->categories)
+                        @foreach($post->categories as $category)
+                            <span class="badge badge-pill badge-info">{{$category->name}}</span>
+                        @endforeach
+                    @endif
+                </td>
                 <td>{{$post->title}}</td>
                 <td>{{$post->body}}</td>
                 <td>{{$post->created_at->diffForHumans()}}</td>
