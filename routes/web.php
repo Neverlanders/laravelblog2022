@@ -41,6 +41,7 @@ Auth::routes(['verify'=>true]);
 Route::group(['prefix' => 'admin', 'middleware'=> 'admin'], function(){
     Route::resource('users',App\Http\Controllers\AdminUsersController::class);
     Route::get('users/restore/{user}', 'App\Http\Controllers\AdminUsersController@restore')->name('users.restore');
+    Route::resource('comments',\App\Http\Controllers\AdminPostCommentsController::class);
 });
 //Route::group(['prefix' => 'admin', 'middleware'=> ['auth','admin']], function()
 Route::group(['prefix' => 'admin', 'middleware'=> ['auth','verified']], function(){

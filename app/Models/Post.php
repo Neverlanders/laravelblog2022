@@ -20,4 +20,16 @@ class Post extends Model
     public function photo(){
         return $this->belongsTo(Photo::class);
     }
+    public function postcomments(){
+        return $this->hasMany(PostComment::class);
+    }
+    /**searching/filtering**/
+    public function scopeFilter($query, array $filters){
+        //if(isset($filters['search']) == false
+        if($filters['search'] ?? false){ //php 8
+            $query
+                ->where('title','like', '%' . request('search') . '%')
+                ->orWhere('body','like', '%' . request('search') . '%');
+        }
+    }
 }

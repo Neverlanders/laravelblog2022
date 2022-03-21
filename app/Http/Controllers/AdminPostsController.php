@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostsCreateRequest;
 use App\Models\Category;
 use App\Models\Photo;
 use App\Models\Post;
@@ -19,7 +20,7 @@ class AdminPostsController extends Controller
     public function index()
     {
         //
-        $posts = Post::paginate(15);
+        $posts = Post::with(['photo','categories','user'])->filter(request(['search']))->paginate(15);
         Session::flash('user_message', 'No posts found');
         return view('admin.posts.index', compact('posts'));
     }
@@ -42,7 +43,7 @@ class AdminPostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostsCreateRequest $request)
     {
         //
         //dd($request);
@@ -76,6 +77,8 @@ class AdminPostsController extends Controller
     public function show($id)
     {
         //
+        $post = Post::findOrFail($id);
+        return view('admin.posts.show', compact('post'));
     }
 
     /**
@@ -87,6 +90,9 @@ class AdminPostsController extends Controller
     public function edit($id)
     {
         //
+        $categories = Category::all();
+        $post = Post::findOrFail($id);
+        return view('admin.posts.edit', compact('post', 'categories'));
     }
 
     /**
@@ -99,7 +105,36 @@ class AdminPostsController extends Controller
     public function update(Request $request, $id)
     {
         //
+        //opzoeken van de post die aangepast dient te worden
+        $post = Post::findOrFail($id);
+        //opgezochte post wordt vervangen met de nieuwe ingevulde waarden
+        //uit het formulier
+        $post->title = $request->title;
+        $post->body = $request->body;
+        /**photo opslaan**/
+        if($file = $request->file('photo_id')){
+            /** opvragen oude image **/
+            $oldImage = Photo::find($post->photo_id);
+            if($oldImage){
+                //fysisch verwijderen uit img directory
+                unlink(public_path() . $oldImage->file);
+                //oude image uit de tabel photos verwijderen
+                $oldImage->delete();
+            }
+            //vanaf hier wordt de nieuwe photo opgeslagen.
+            /**wegschrijven naar de img folder**/
+            $name = time(). $file->getClientOriginalName();
+            $file->move('img', $name);
+            /**wegschrijven naar de photo table**/
+            $photo = Photo::create(['file'=>$name]);
+            $post->photo_id = $photo->id;
+        }
+        $post->update();
+        //categoriëen syncen
+        $post->categories()->sync($request->categories,true);
+        return redirect()->route('posts.index');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -110,5 +145,15 @@ class AdminPostsController extends Controller
     public function destroy($id)
     {
         //
+        $post = Post::findOrFail($id);
+        //fysisch verwijderen img tabel
+        if($post->photo){
+            unlink(public_path() . $post->photo->file);
+            //photo deleten uit photo tabel
+            $post->photo->delete();
+        }
+        //de post zelf deleten
+        $post->delete();
+        return redirect()->route('posts.index');
     }
 }

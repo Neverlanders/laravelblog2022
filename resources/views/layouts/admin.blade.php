@@ -110,9 +110,23 @@
             </a>
             <div id="collapsePostCategories" class="collapse" aria-labelledby="collapsePostCategories" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Posts Pages:</h6>
-                    <a class="collapse-item" href="{{route('postcategories.index')}}">All Posts</a>
+                    <h6 class="collapse-header">Posts Categories Pages:</h6>
+                    <a class="collapse-item" href="{{route('postcategories.index')}}">All Post Categories</a>
                     <a class="collapse-item" href="{{route('postcategories.create')}}">Create PostCategory</a>
+                </div>
+            </div>
+        </li>
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePostComments"
+               aria-expanded="true" aria-controls="collapsePostComments">
+                <i class="fas fa-list"></i>
+                <span>Post Comments</span>
+            </a>
+            <div id="collapsePostComments" class="collapse" aria-labelledby="collapsePostComments" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Post Comment Pages:</h6>
+                    <a class="collapse-item" href="{{route('comments.index')}}">All Post Comments</a>
                 </div>
             </div>
         </li>
