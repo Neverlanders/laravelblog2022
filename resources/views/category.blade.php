@@ -31,9 +31,7 @@
                     </div>
                 @endforeach
             </div>
-            <div class="text-center">
-                {{$category->links()}}
-            </div>
+
 
             <div class="row">
                 <div class="col-12">
