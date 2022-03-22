@@ -100,4 +100,8 @@ class AdminPostsCategoriesController extends Controller
         $category->delete();
         return redirect()->route('postcategories.index');
     }
+    public function category(Category $category){
+        $category->load(['posts.categories','posts.photo']);
+        return view('category', compact('category'));
+    }
 }
