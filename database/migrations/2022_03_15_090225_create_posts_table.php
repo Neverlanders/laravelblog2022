@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('user_id')->unsigned()->index();
            // $table->integer('category_id')->unsigned()->index();
             $table->string('title');
+            $table->string('slug')->unique();
             $table->string('body');
             $table->timestamps();
         });

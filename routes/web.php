@@ -24,6 +24,7 @@ Route::get('/', function () {
 });*/
 Route::get('/contactformulier', 'App\Http\Controllers\ContactController@create');
 Route::post('/contactformulier', 'App\Http\Controllers\ContactController@store');
+Route::get('/post/{post:slug}', 'App\Http\Controllers\AdminPostsController@post')->name('home.post');
 
 //verify zorgt ervoor dat enkel een geverifieerde user wordt toegelaten
 //aan de geautentiseerde routes

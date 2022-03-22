@@ -156,4 +156,10 @@ class AdminPostsController extends Controller
         $post->delete();
         return redirect()->route('posts.index');
     }
+
+    public function post(Post $post){
+        //$post = Post::findOrFail($id);
+        return view('post', compact('post'));
+    }
+
 }
