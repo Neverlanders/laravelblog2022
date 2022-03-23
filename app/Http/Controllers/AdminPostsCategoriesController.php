@@ -102,6 +102,8 @@ class AdminPostsCategoriesController extends Controller
     }
     public function category(Category $category){
         $category->load(['posts.categories','posts.photo']);
-        return view('category', compact('category'));
+        $posts = $category->posts()->with('categories', 'photo')->paginate(9);
+        $allCategories = Category::all();
+        return view('category', compact('category','posts','allCategories'));
     }
 }

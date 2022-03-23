@@ -3,14 +3,14 @@
     <section class="catagory-welcome-post-area section_padding_100">
         <div class="container">
             <div class="row">
-                @foreach($category->posts as $post)
+                @foreach($posts as $post)
                     <div class="col-12 col-md-4">
                         <!-- Gazette Welcome Post -->
                         <div class="gazette-welcome-post">
                             <!-- Post Tag -->
                             <div class="gazette-post-tag">
                                 @foreach($post->categories as $postcategories)
-                                    <a href="#">{{$postcategories->name}}</a>
+                                    <a href="{{route('category.category', $postcategories->name)}}">{{$postcategories->name}}</a>
                                 @endforeach
                             </div>
                             <h2 class="font-pt">{{$post->title}}</h2>
@@ -31,26 +31,10 @@
                     </div>
                 @endforeach
             </div>
-
-
             <div class="row">
-                <div class="col-12">
-                    <div class="gazette-pagination-area">
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination">
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next"><i class="fa fa-angle-right"></i></a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
+               {{$posts->render()}}
             </div>
+
         </div>
     </section>
 @endsection

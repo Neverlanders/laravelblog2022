@@ -186,24 +186,13 @@
                                             <a class="dropdown-item" href="contact.html">Contact</a>
                                         </div>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Politics</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Lifestyle</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Travel</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Health</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Entertainment</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">sport</a>
-                                    </li>
+                                    @foreach($allCategories as $category)
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{route('category.category', $category->name)}}">{{$category->name}}</a>
+                                        </li>
+                                    @endforeach
+
+
                                 </ul>
                                 <!-- Search Form -->
                                 <div class="header-search-form mr-auto">
