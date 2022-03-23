@@ -241,92 +241,31 @@
                 <div class="editorial-post-slides owl-carousel">
 
                     <!-- Editorial Post Single Slide -->
-                    <div class="editorial-post-single-slide">
+                    @foreach($slides as $slide)
+                        <div class="editorial-post-single-slide">
                         <div class="row">
                             <div class="col-12 col-md-5">
                                 <div class="editorial-post-thumb">
-                                    <img src="{{asset('img/imagesfront/blog-img/bitcoin.jpg')}}" alt="">
+                                    <img class="img-fluid" src="{{asset($slide->photo ? $slide->photo->file : 'http://via.placeholder.com/400')}}" alt="post-thumb">
                                 </div>
                             </div>
                             <div class="col-12 col-md-7">
                                 <div class="editorial-post-content">
                                     <!-- Post Tag -->
                                     <div class="gazette-post-tag">
-                                        <a href="#">Editorial</a>
+                                        @foreach($slide->categories as $slideCategory)
+                                            <a href="{{route('category.category', $slideCategory->name)}}">{{$slideCategory->name}}</a>
+                                        @endforeach
                                     </div>
-                                    <h2><a href="#" class="font-pt mb-15">Move over, bitcoin. <br>Here comes litecoin</a></h2>
-                                    <p class="editorial-post-date mb-15">March 29, 2016</p>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ultrices egestas nunc, quis venenatis orci tincidunt id. Fusce commodo blandit eleifend. Nullam viverra tincidunt dolor, at pulvinar dui. Nullam at risus ut ipsum viverra posuere. Aliquam quis convallis enim. Nunc pulvinar molestie sem id blandit. Nunc venenatis interdum mollis...</p>
+                                    <h2><a href="#" class="font-pt mb-15">{{Str::limit($slide->title,50,'...')}}</a></h2>
+                                    <p class="editorial-post-date mb-15">{{$slide->created_at->diffForHumans()}}</p>
+                                    <p>{{Str::limit($slide->body,200,'...')}}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    @endforeach
 
-                    <!-- Editorial Post Single Slide -->
-                    <div class="editorial-post-single-slide">
-                        <div class="row">
-                            <div class="col-12 col-md-5">
-                                <div class="editorial-post-thumb">
-                                    <img src="{{asset('img/imagesfront/blog-img/bitcoin.jpg')}}" alt="">
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-7">
-                                <div class="editorial-post-content">
-                                    <!-- Post Tag -->
-                                    <div class="gazette-post-tag">
-                                        <a href="#">Editorial</a>
-                                    </div>
-                                    <h2><a href="#" class="font-pt mb-15">Move over, bitcoin. <br>Here comes litecoin</a></h2>
-                                    <p class="editorial-post-date mb-15">March 29, 2016</p>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ultrices egestas nunc, quis venenatis orci tincidunt id. Fusce commodo blandit eleifend. Nullam viverra tincidunt dolor, at pulvinar dui. Nullam at risus ut ipsum viverra posuere. Aliquam quis convallis enim. Nunc pulvinar molestie sem id blandit. Nunc venenatis interdum mollis...</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Editorial Post Single Slide -->
-                    <div class="editorial-post-single-slide">
-                        <div class="row">
-                            <div class="col-12 col-md-5">
-                                <div class="editorial-post-thumb">
-                                    <img src="{{asset('img/imagesfront/blog-img/bitcoin.jpg')}}" alt="">
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-7">
-                                <div class="editorial-post-content">
-                                    <!-- Post Tag -->
-                                    <div class="gazette-post-tag">
-                                        <a href="#">Editorial</a>
-                                    </div>
-                                    <h2><a href="#" class="font-pt mb-15">Move over, bitcoin. <br>Here comes litecoin</a></h2>
-                                    <p class="editorial-post-date mb-15">March 29, 2016</p>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ultrices egestas nunc, quis venenatis orci tincidunt id. Fusce commodo blandit eleifend. Nullam viverra tincidunt dolor, at pulvinar dui. Nullam at risus ut ipsum viverra posuere. Aliquam quis convallis enim. Nunc pulvinar molestie sem id blandit. Nunc venenatis interdum mollis...</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Editorial Post Single Slide -->
-                    <div class="editorial-post-single-slide">
-                        <div class="row">
-                            <div class="col-12 col-md-5">
-                                <div class="editorial-post-thumb">
-                                    <img src="{{asset('img/imagesfront/blog-img/bitcoin.jpg')}}" alt="">
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-7">
-                                <div class="editorial-post-content">
-                                    <!-- Post Tag -->
-                                    <div class="gazette-post-tag">
-                                        <a href="#">Editorial</a>
-                                    </div>
-                                    <h2><a href="#" class="font-pt mb-15">Move over, bitcoin. <br>Here comes litecoin</a></h2>
-                                    <p class="editorial-post-date mb-15">March 29, 2016</p>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ultrices egestas nunc, quis venenatis orci tincidunt id. Fusce commodo blandit eleifend. Nullam viverra tincidunt dolor, at pulvinar dui. Nullam at risus ut ipsum viverra posuere. Aliquam quis convallis enim. Nunc pulvinar molestie sem id blandit. Nunc venenatis interdum mollis...</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

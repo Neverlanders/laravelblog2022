@@ -13,18 +13,18 @@
                                     <a href="{{route('category.category', $postcategories->name)}}">{{$postcategories->name}}</a>
                                 @endforeach
                             </div>
-                            <h2 class="font-pt">{{$post->title}}</h2>
+                            <h2 class="font-pt">{{Str::limit($post->title,20, '...')}}</h2>
                             <p class="gazette-post-date">{{$post->created_at->diffForHumans()}}</p>
                             <!-- Post Thumbnail -->
                             <div class="blog-post-thumbnail my-5">
                                 <img class="img-fluid" src="{{asset($post->photo ? $post->photo->file : 'http://via.placeholder.com/400')}}" alt="post-thumb">
                             </div>
                             <!-- Post Excerpt -->
-                            <p>{{$post->body}}</p>
+                            <p>{{Str::limit($post->body,200,'...')}}</p>
                             <!-- Reading More -->
                             <div class="post-continue-reading-share mt-30">
                                 <div class="post-continue-btn">
-                                    <a href="#" class="font-pt">Continue Reading <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                                    <a href="{{route('home.post', $post)}}" class="font-pt">Continue Reading <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
                                 </div>
                             </div>
                         </div>
