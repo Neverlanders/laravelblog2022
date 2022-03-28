@@ -45,6 +45,7 @@ Route::group(['prefix' => 'admin', 'middleware'=> 'admin'], function(){
     Route::get('users/restore/{user}', 'App\Http\Controllers\AdminUsersController@restore')->name('users.restore');
     Route::resource('comments',\App\Http\Controllers\AdminPostCommentsController::class);
     Route::resource('replies', \App\Http\Controllers\AdminPostCommentRepliesController::class);
+    Route::get('tags', 'App\Http\Controllers\AdminPostsTagsController@index')->name('posttags');
 });
 //Route::group(['prefix' => 'admin', 'middleware'=> ['auth','admin']], function()
 Route::group(['prefix' => 'admin', 'middleware'=> ['auth','verified']], function(){
