@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Intervention\Image\Facades\Image;
 
 class AdminUsersController extends Controller
 {
@@ -28,13 +29,9 @@ class AdminUsersController extends Controller
     public function index()
     {
         //
-        //$users = User::all(); //eloquent way ORM
-       //$users = User::paginate(15);
-       $users= User::with(['photo', 'roles'])->withTrashed()->paginate(15);
-        //$users = DB::table('users')->get(); //query builder
-        //dd($users);
-        //return view('admin.users.index', ['users' => $users]);
-        return view('admin.users.index', compact('users'));
+
+       $users= User::with(['photo', 'roles'])->withTrashed()->sortable()->paginate(15);
+       return view('admin.users.index', compact('users'));
 
     }
 
@@ -68,9 +65,15 @@ class AdminUsersController extends Controller
 
         /**photo opslaan**/
         if($file = $request->file('photo_id')){
-
             $name = time() . $file->getClientOriginalName();
-            $file->move('img', $name);
+            Image::make($file)
+                ->resize(300,300, function($constraint){
+                    $constraint->aspectRatio();
+                })
+                ->crop(200,200)
+                ->insert(public_path('/img/watermark.png'), 'bottom-right',20,20)
+                ->save(public_path('/img/' . $name));
+            //$file->move('img', $name);
             $photo = Photo::create(['file'=>$name]);
             $user->photo_id = $photo->id;
         }

@@ -14,8 +14,8 @@
             <tr>
                 <th>Id</th>
                 <th>Photo</th>
-                <th>Name</th>
-                <th>Email</th>
+                <th>@sortablelink('name')</th>
+                <th>@sortablelink('email')</th>
                 <th>Role</th>
                 <th>Active</th>
                 <th>Created</th>
@@ -59,6 +59,6 @@
         </tbody>
 
     </table>
-{{$users->render()}}
+
 
     @endsection
