@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Comment;
+use App\Models\Reply;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
-class AdminPostCommentsController extends Controller
+class AdminPostCommentRepliesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +17,6 @@ class AdminPostCommentsController extends Controller
     public function index()
     {
         //
-        $comments = Comment::with(['user','post'])->latest()->paginate(10);
-        return view('admin.comments.index', compact('comments'));
     }
 
     /**
@@ -40,20 +38,19 @@ class AdminPostCommentsController extends Controller
     public function store(Request $request)
     {
         //
-       //dd($request);
-        if($user = Auth::user()){
-            $data =[
-                'post_id'=>$request->post_id,
-                'body'=>$request->body,
-                'user_id' => $user->id,
+        if(Auth::user()){
+            $user = Auth::user();
+            $data = [
+              'comment_id' => $request->postcomment_id,
+              'user_id'=>  $user->id,
                 'photo_id'=>$user->photo_id,
+                'body'=>$request->body,
             ];
-            Comment::create($data);
-            Session::flash('postcomment_message', 'Message submitted and awaits moderation');
+            Reply::create($data);
+            Session::flash('postcomment_message', 'Reply message submitted and awaits moderation!');
         }
         return redirect()->back();
     }
-
 
     /**
      * Display the specified resource.
@@ -87,14 +84,6 @@ class AdminPostCommentsController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $comment = Comment::findOrFail($id);
-        if($request->is_active == 0){
-            $comment->is_active = 1;
-        }else{
-            $comment->is_active = 0;
-        }
-        $comment->update();
-        return redirect()->back();
     }
 
     /**
@@ -106,7 +95,5 @@ class AdminPostCommentsController extends Controller
     public function destroy($id)
     {
         //
-        Comment::findOrFail($id)->delete();
-        return redirect()->back();
     }
 }

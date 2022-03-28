@@ -162,7 +162,7 @@ class AdminPostsController extends Controller
 
     public function post(Post $post){
         //$post = Post::findOrFail($id);
-        $post->load(['categories','photo']);
+        $post->load(['postcomments.user']);
         return view('post', compact('post'));
     }
 

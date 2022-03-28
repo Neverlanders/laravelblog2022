@@ -57,6 +57,12 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Post::class);
        // return $this->hasMany('App\Models\Post');
     }
+    public function postcomments(){
+        return $this->hasMany(Comment::class);
+    }
+    public function postcommentreplies(){
+        return $this->hasMany(Reply::class);
+    }
 
     public function isAdmin(){
         foreach($this->roles as $role){
