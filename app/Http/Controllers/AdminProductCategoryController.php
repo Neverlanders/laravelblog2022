@@ -27,6 +27,8 @@ class AdminProductCategoryController extends Controller
     public function create()
     {
         //
+        return view('admin.productcategories.create');
+
     }
 
     /**
@@ -38,6 +40,8 @@ class AdminProductCategoryController extends Controller
     public function store(Request $request)
     {
         //
+        ProductCategory::create($request->all());
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -59,7 +63,10 @@ class AdminProductCategoryController extends Controller
      */
     public function edit($id)
     {
+        //dd($productcategory);
         //
+        $productcategory= ProductCategory::findOrFail($id);
+        return view('admin.productcategories.edit', compact('productcategory'));
     }
 
     /**
@@ -72,6 +79,9 @@ class AdminProductCategoryController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $productcategory = ProductCategory::findOrFail($id);
+        $productcategory->update($request->all());
+        return redirect()->route('categories.index');
     }
 
     /**

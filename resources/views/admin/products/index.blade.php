@@ -2,11 +2,21 @@
 @section('content')
     <div class="col-12">
         <h1>Products</h1>
+        <div class="d-flex justify-content-center">
+            <a href="{{route('products.index')}}"
+               class="badge badge-primary m-1 p-3">All</a>
+            @foreach($brands as $brand)
+                <a href="{{route('productsPerBrand', $brand->id)}}"
+                   class="badge badge-primary m-1 p-3">{{$brand->name}}</a>
+            @endforeach
+        </div>
         <table class="table table-striped">
             <thead>
             <tr>
                 <th>Id</th>
                 <th>Photo</th>
+                <th>Category</th>
+                <th>Brand</th>
                 <th>Name</th>
                 <th>Keywords</th>
                 <th>Body</th>
@@ -25,6 +35,8 @@
                                  src="{{$product->photo ? asset('img/products') . $product->photo->file : 'http://via.placeholder.com/62'}}"
                                  alt="{{$product->name}}">
                         </td>
+                        <td>{{$product->productcategory ? $product->productcategory->name : 'no category'}}</td>
+                        <td>{{$product->brand ? $product->brand->name : 'no brand'}}</td>
                         <td>{{$product->name}}</td>
                         <td>
                             @if($product->keywords)

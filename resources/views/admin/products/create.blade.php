@@ -10,6 +10,23 @@
                 <input type="text" name="name" id="name" class="form-control" placeholder="Title...">
             </div>
             <div class="form-group">
+                <label for="brand">Brand (CTRL + CLICK multiple select)</label>
+                <select name="brand_id" class="form-control custom-select">
+                    @foreach($brands as $brand)
+                        <option value="{{$brand->id}}">{{$brand->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="brand">Brand (CTRL + CLICK multiple select)</label>
+                <select name="category_id" class="form-control custom-select">
+                    @foreach($productcategories as $category)
+                        <option value="{{$category->id}}">{{$category->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="form-group">
                 <label for="keyword">Keyword (CTRL + CLICK multiple select)</label>
                 <select name="keywords[]" class="form-control custom-select" multiple>
                     @foreach($keywords as $keyword)
