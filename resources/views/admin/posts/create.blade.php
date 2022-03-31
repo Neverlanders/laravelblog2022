@@ -18,6 +18,14 @@
                 </select>
             </div>
             <div class="form-group">
+                <label for="keyword">Keyword (CTRL + CLICK multiple select)</label>
+                <select name="keywords[]" class="form-control custom-select" multiple>
+                    @foreach($keywords as $keyword)
+                        <option value="{{$keyword->id}}">{{$keyword->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
                <textarea class="form-control" name="body" id="body" cols="100%" rows="10" placeholder="Description..."></textarea>
             </div>
             <div class="form-group">

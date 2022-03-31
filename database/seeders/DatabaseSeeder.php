@@ -23,6 +23,9 @@ class DatabaseSeeder extends Seeder
             CategoriesTableSeeder::class,
             RepliesTableSeeder::class,
             TagsTableSeeder::class,
+            KeywordsTableSeeder::class,
+            BrandsTableSeeder::class,
+            ProductCategorySeeder::class,
         ]);
     }
 }

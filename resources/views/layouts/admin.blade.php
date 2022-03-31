@@ -6,10 +6,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
+    <meta name="description" content="@yield('seo')">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>@yield('title')</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -127,6 +127,41 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Post Comment Pages:</h6>
                     <a class="collapse-item" href="{{route('comments.index')}}">All Post Comments</a>
+                </div>
+            </div>
+        </li>
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProducts"
+               aria-expanded="true" aria-controls="collapseProducts">
+                <i class="fas fa-product-hunt"></i>
+                <span>Products</span>
+            </a>
+            <div id="collapseProducts" class="collapse" aria-labelledby="collapseProducts" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Product Pages:</h6>
+                    <a class="collapse-item" href="{{route('products.index')}}">All Products</a>
+                    <a class="collapse-item" href="{{route('products.create')}}">Create Product</a>
+                </div>
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Product Category Pages:</h6>
+                    <a class="collapse-item" href="{{route('categories.index')}}">All Product Categories</a>
+                    <a class="collapse-item" href="{{route('categories.create')}}">Create Product Category</a>
+                </div>
+            </div>
+        </li>
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBrands"
+               aria-expanded="true" aria-controls="collapseBrands">
+                <i class="fas fa-asterisk"></i>
+                <span>Brands</span>
+            </a>
+            <div id="collapseBrands" class="collapse" aria-labelledby="collapseBrands" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Brand Pages:</h6>
+                    <a class="collapse-item" href="{{route('brands.index')}}">All Brands</a>
+                    <a class="collapse-item" href="{{route('brands.create')}}">Create Brand</a>
                 </div>
             </div>
         </li>

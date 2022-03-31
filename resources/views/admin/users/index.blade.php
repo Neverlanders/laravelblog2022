@@ -1,4 +1,10 @@
 @extends('layouts.admin')
+@section('seo')
+    users, crud
+    @endsection
+@section('title')
+    Users
+    @endsection
 @section('content')
 
         <div class="col-12">
@@ -30,7 +36,7 @@
             <tr>
                 <td>{{$user->id}}</td>
                 <td>
-                    <img width="auto" height="62" src="{{$user->photo ? asset($user->photo->file): 'http://via.placeholder.com/62'}}" alt="{{$user->name}}">
+                    <img width="auto" height="62" src="{{$user->photo ? asset('img/users') . $user->photo->file: 'http://via.placeholder.com/62'}}" alt="{{$user->name}}">
                 </td>
                 <td>{{$user->name}}</td>
                 <td>{{$user->email}}</td>
