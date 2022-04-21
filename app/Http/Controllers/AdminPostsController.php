@@ -178,4 +178,8 @@ class AdminPostsController extends Controller
         return view('post', compact('post'));
     }
 
+    public function livewireindex(){
+        return view('admin.posts.livewireindex');
+    }
+
 }
