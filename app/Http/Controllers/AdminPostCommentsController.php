@@ -109,4 +109,8 @@ class AdminPostCommentsController extends Controller
         Comment::findOrFail($id)->delete();
         return redirect()->back();
     }
+
+    public function setBestComment(Comment $postcomment){
+        $this->best_comment_id = $postcomment->id;
+    }
 }

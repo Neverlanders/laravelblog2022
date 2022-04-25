@@ -270,7 +270,8 @@
                                             <span
                                                 class="comment-date font-pt">{{$postcomment->created_at->diffForHumans()}}</span>
                                             <p>{{$postcomment->body}}</p>
-                                            <div id="accordion">
+
+                                                <div id="accordion">
                                                 <a class="reply-btn" data-toggle="collapse"
                                                    data-target="#collapse{{$postcomment->id}}" aria-expanded="false"
                                                    aria-controls="collapse{{$postcomment->id}}" href="#">Reply <i
@@ -302,11 +303,15 @@
 
                                         </div>
                                     </div>
-
-                                    <ol class="children">
+                                    @can('update', $postcomment)
+                                        <ol class="children">
                                         @foreach($postcomment->postcommentreplies as $postcommentreply)
                                             <li class="single_comment_area">
+                                                @if($postcommentreply->id == $postcommentreply->postcomment->best_replies_id)
+                                                    <p class="badge badge-pill badge-info">Best Reply</p>
+                                                @endif
                                             <div class="comment-wrapper d-md-flex align-items-start">
+
                                                 <!-- Comment Meta -->
                                                 <div class="comment-author">
                                                     <img class="rounded-circle" src="{{$postcommentreply->user->photo ? $postcommentreply->user->photo->file : 'http://via.placeholder.com/70x70'}}" alt="">
@@ -318,12 +323,16 @@
                                                     <p>{{$postcommentreply->body}}</p>
                                                     <a class="reply-btn" href="#">Reply <i class="fa fa-reply"
                                                                                            aria-hidden="true"></i></a>
+                                                    <form class="pt-4" method="POST" action="{{route('bestreply', $postcommentreply)}}">
+                                                        @csrf
+                                                        <button type="submit" class="btn text-muted p-0">Best comment?</button>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </li>
                                         @endforeach
                                     </ol>
-
+                                    @endcan
                                 </li>
                             @endif
                         @endforeach

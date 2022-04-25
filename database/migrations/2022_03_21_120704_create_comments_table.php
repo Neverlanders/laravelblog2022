@@ -21,6 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('is_active')->default(0);
             $table->unsignedBigInteger('photo_id');
             $table->text('body');
+            $table->unsignedBigInteger('best_replies_id')->nullable();
             $table->timestamps();
         });
     }
